@@ -121,115 +121,81 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
     -->
-    <script>
-        function getAndUpdate() {
-            console.log("updating list..")
-            tit = document.getElementById("title").value;
-            desc = document.getElementById("description").value;
+    <script src="index.js">
+//         function getAndUpdate() {
+//             console.log("updating list..")
+//             tit = document.getElementById("title").value;
+//             desc = document.getElementById("description").value;
 
-            if (localStorage.getItem('itemsJson') == null) {
-                itemJsonArray = [];
-                itemJsonArray.push([tit, desc]);
-                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
-            }
-            else {
-                itemJsonArrayStr = localStorage.getItem('itemsJson')
-                itemJsonArray = JSON.parse(itemJsonArrayStr);
-                itemJsonArray.push([tit, desc]);
-                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+//             if (localStorage.getItem('itemsJson') == null) {
+//                 itemJsonArray = [];
+//                 itemJsonArray.push([tit, desc]);
+//                 localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+//             }
+//             else {
+//                 itemJsonArrayStr = localStorage.getItem('itemsJson')
+//                 itemJsonArray = JSON.parse(itemJsonArrayStr);
+//                 itemJsonArray.push([tit, desc]);
+//                 localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
 
-            }
-            update();
-        }
-        function update() {
-            if (localStorage.getItem('itemsJson') == null) {
-                itemJsonArray = [];
-                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
-            }
-            else {
-                itemJsonArrayStr = localStorage.getItem('itemsJson')
-                itemJsonArray = JSON.parse(itemJsonArrayStr);
-
-
-            }
+//             }
+//             update();
+//         }
+//         function update() {
+//             if (localStorage.getItem('itemsJson') == null) {
+//                 itemJsonArray = [];
+//                 localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+//             }
+//             else {
+//                 itemJsonArrayStr = localStorage.getItem('itemsJson')
+//                 itemJsonArray = JSON.parse(itemJsonArrayStr);
 
 
+//             }
 
-            //populate the table
-            tableBody = document.getElementById("tableBody")
-            let str = "";
-            itemJsonArray.forEach((element, index) => {
-                str += `
-                <tr>
-                    <th scope="row">${index + 1}</th>
-                    <td>${element[0]}</td>
-                    <td>${element[1]}</td>
-                    <td>
-                        <buton class="btn btn-primary" onclick="delete(${index})">Delete</buton>
-                    </td>
 
-                </tr>`;
 
-            });
-            tableBody.innerHTML = str;
-        }
+//             //populate the table
+//             tableBody = document.getElementById("tableBody")
+//             let str = "";
+//             itemJsonArray.forEach((element, index) => {
+//                 str += `
+//                 <tr>
+//                     <th scope="row">${index + 1}</th>
+//                     <td>${element[0]}</td>
+//                     <td>${element[1]}</td>
+//                     <td>
+//                         <buton class="btn btn-primary" onclick="delete(${index})">Delete</buton>
+//                     </td>
 
-        add = document.getElementById("add");
-        add.addEventListener("click", getAndUpdate);
-        update();
-        function deleted(itemIndex) {
-            console.log("delete", itemIndex);
-            itemJsonArrayStr = localStorage.getItem('itemsJson')
-            itemJsonArray = JSON.parse(itemJsonArrayStr);
+//                 </tr>`;
 
-            //delete itemIndex element from the array(usin splice method to delete from the array)
-            itemJsonArray.splice(itemIndex, 1);
-            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
-            update();
-        }
+//             });
+//             tableBody.innerHTML = str;
+//         }
 
-        function clearStorage() {
-            if (confirm("Do you really want to clear?")) { }  //added a confirmation! because it can be deadly
-            console.log("clearing the localStorage");
-            localStorage.clear();
-            update();
-        }
-    }
-    //    let add = document.getElementbyId("add");
-    //     add.addEventListener("click", () => {
-    //         console.log("updating list...");
-    //         tit = document.getElementById('title').value;
-    //         desc = document.getElementById('description').value;
-    //         if (localStorage.getItem('itemJson') == null) {
-    //             itemJsonArray = [];
-    //             itemJsonArray.push([tit, desc]);
-    //             localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
-    //         }
-    //         else {
-    //             itemJsonArrayStr = localStorage.getItem('itemsJson')
-    //             itemJsonArray = JSON.parse(itemJsonArrayStr);
-    //             itemJsonArray.push([tit, desc]);
-    //             localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
-    //         }
+//         add = document.getElementById("add");
+//         add.addEventListener("click", getAndUpdate);
+//         update();
+//         function deleted(itemIndex) {
+//             console.log("delete", itemIndex);
+//             itemJsonArrayStr = localStorage.getItem('itemsJson')
+//             itemJsonArray = JSON.parse(itemJsonArrayStr);
 
-    //         //populate the table
-    //         let tableBody=document.getElementById("tableBody")
-    //         itemJsonArray.forEach((element,index) => {
-    //             let str="";
-    //             str+=`
-    //             <tr>
-    //                 <th scope="row">${index+1}</th>
-    //                 <td>${element[0]}</td>
-    //                 <td>${element[1]}</td>
-    //                 <td>
-    //                     <buton class="btn btn-primary">Delete</buton>
-    //                 </td>
+//             //delete itemIndex element from the array(usin splice method to delete from the array)
+//             itemJsonArray.splice(itemIndex, 1);
+//             localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+//             update();
+//         }
 
-    //             </tr>`;
-    //         });
-
-    //         tableBody.innerHTML=str;
-    //     })
+//         function clearStorage() {
+//             if (confirm("Do you really want to clear?")) { }  //added a confirmation! because it can be deadly
+//             console.log("clearing the localStorage");
+//             localStorage.clear();
+//             update();
+//         }
+    
+   
     </script>
 </body>
 
